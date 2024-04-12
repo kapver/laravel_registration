@@ -1,0 +1,1 @@
+{{ $userName }}, welcome to {{ $companyName }}! Thank you for joining us. To explore our platform please visit {{ $welcomeUrl }}

@@ -7,11 +7,9 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\SimpleMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
 
-class UserRegistered extends Notification/* implements ShouldQueue*/
+class UserRegistered extends Notification
 {
     use Queueable;
 
@@ -30,7 +28,7 @@ class UserRegistered extends Notification/* implements ShouldQueue*/
      */
     public function via(object $notifiable): array
     {
-        return [/*'mail',*/ SMSChannel::class];
+        return ['mail', SMSChannel::class];
     }
 
     /**

@@ -17,8 +17,6 @@ class RegistrationApiController extends Controller
     {
         $user = $service->register($request->validated());
 
-        UserRegistered::dispatch($user);
-
         return response()->json([
             'message' => 'Registration successful',
             'user'    => new UserResource($user),

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Events\UserRegistered;
 use App\Models\User;
+use App\Events\UserRegistered;
 use Illuminate\Support\Facades\Hash;
 
 class AuthUserService
@@ -16,16 +16,22 @@ class AuthUserService
             'password' => Hash::make(''), // consider users don't use passwords
         ]);
 
-        $user->phone()->create([
+        $user->phoneBook()->create([
             'phone_number' => $data['phone_number'],
         ]);
 
-        $user->country()->create([
+        $user->userCountry()->create([
             'user_id' => $user->id,
             'country_id' => $data['country_id'],
         ]);
 
         $user->fresh();
+
+        // direct notification
+        $user->notify(new \App\Notifications\UserRegistered());
+
+        // or using UserRegistered event
+        // UserRegistered::dispatch($user);
 
         return $user;
     }

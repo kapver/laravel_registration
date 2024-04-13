@@ -47,13 +47,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function phone(): HasOne
+    public function phoneBook(): HasOne
     {
         return $this->hasOne(PhoneBook::class);
     }
 
-    public function country(): HasOne
+    public function userCountry(): HasOne
     {
         return $this->hasOne(UserCountry::class);
+    }
+
+    public function getCountryAttribute()
+    {
+        return $this->userCountry->country->name ?? 'N/A';
+    }
+
+    public function getPhoneNumberAttribute()
+    {
+        return $this->phoneBook->phone_number ?? 'N/A';
     }
 }

@@ -17,6 +17,8 @@ class RegistrationRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'country_id' => 'required|exists:countries,id',
+
+            // consider adding better phone number validation or use a third party solution
             'phone_number' => 'required|string|max:255|unique:phone_book,phone_number',
         ];
     }

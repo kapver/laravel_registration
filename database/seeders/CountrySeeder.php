@@ -13,8 +13,11 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        $countriesJson = Storage::get('fixtures/countries.json');
-        $countries = json_decode($countriesJson, true);
-        Country::insert($countries);
+        $path = app_path('../countries.json');
+        if (file_exists($path)) {
+            $countriesJson = file_get_contents($path);
+            $countries = json_decode($countriesJson, true);
+            Country::insert($countries);
+        }
     }
 }
